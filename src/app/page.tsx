@@ -16,7 +16,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen py-12 px-4 md:py-20">
       <div className="max-w-5xl mx-auto bg-white rounded-3xl shadow-sm border border-border p-6 md:p-12">
-        <header className="text-center mb-16">
+        <header className="text-center mb-12">
           <div className="inline-block px-4 py-1.5 mb-6 text-sm font-semibold tracking-wide uppercase bg-primary/5 text-primary rounded-full">
             Help Center
           </div>
@@ -39,6 +39,8 @@ export default function HomePage() {
             </div>
           )}
         </header>
+
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-border/50 to-transparent mb-12" />
 
         <main className="categories-grid">
           {faqData.categories.map((category) => (

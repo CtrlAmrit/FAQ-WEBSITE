@@ -90,16 +90,22 @@
 /* FAQ Specific Styles */
 .categories-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: 1fr;
     gap: 1.5rem;
 }
 
+@media (min-width: 768px) {
+    .categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 .category-card {
-    @apply bg-card p-6 rounded-xl shadow-sm decoration-0 text-current transition-all duration-300 border border-border flex flex-col relative outline-none;
+    @apply bg-card p-6 rounded-2xl shadow-sm decoration-0 text-current transition-all duration-300 border border-border flex flex-col relative outline-none cursor-pointer;
 }
 
 .category-card:hover {
-    @apply -translate-y-1 shadow-md border-border/50;
+    @apply -translate-y-1 shadow-lg border-primary/20 bg-accent/50;
 }
 
 .category-card:focus-visible {
@@ -107,11 +113,11 @@
 }
 
 .category-icon {
-    @apply text-3xl mb-4 bg-primary/[0.03] w-12 h-12 flex items-center justify-center rounded-lg text-primary transition-colors duration-300;
+    @apply text-3xl mb-4 bg-primary/[0.05] w-12 h-12 flex items-center justify-center rounded-xl text-primary transition-all duration-300 border border-primary/5 shadow-inner;
 }
 
 .category-card:hover .category-icon {
-    @apply bg-primary/[0.06];
+    @apply bg-primary/10 scale-105;
 }
 
 .category-content h3 {
