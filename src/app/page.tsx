@@ -28,13 +28,13 @@ export default function HomePage() {
             <div className="mt-8 animate-in fade-in slide-in-from-top-4 duration-700">
               <Link 
                 href={`/faq?category=${lastCategory}`}
-                className="inline-flex items-center gap-2 text-sm font-medium text-primary bg-primary/5 px-4 py-2 rounded-full border border-primary/10 hover:bg-primary/10 transition-colors"
+                className="inline-flex items-center gap-2.5 text-[15px] font-semibold text-primary bg-primary/[0.03] px-5 py-2.5 rounded-full border border-primary/20 hover:bg-primary/[0.08] hover:border-primary/30 transition-all duration-300 shadow-sm hover:shadow-md"
               >
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                 </span>
-                Continue where you left off: <span className="font-bold">{faqData.categories.find(c => c.id === lastCategory)?.title}</span> →
+                <span>Continue where you left off: <span className="underline underline-offset-4 decoration-primary/30 group-hover:decoration-primary">{faqData.categories.find(c => c.id === lastCategory)?.title}</span> →</span>
               </Link>
             </div>
           )}
@@ -57,7 +57,7 @@ export default function HomePage() {
                 <div className="flex items-center gap-2 mb-1">
                   <h3 className="text-lg font-bold text-foreground tracking-tight">{category.title}</h3>
                   {lastCategory === category.id && (
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-primary bg-primary/10 px-1.5 py-0.5 rounded">Last Visited</span>
+                    <span className="text-[9px] font-bold uppercase tracking-[0.05em] text-primary/70 bg-primary/[0.04] px-2 py-0.5 rounded-full border border-primary/10">Last Visited</span>
                   )}
                 </div>
                 <p className="text-sm text-muted-foreground mb-4 leading-relaxed">{category.description}</p>
@@ -81,6 +81,10 @@ export default function HomePage() {
             </Link>
           ))}
         </main>
+
+        <div className="mt-16 flex flex-col items-center opacity-40">
+          <div className="w-16 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+        </div>
 
         <footer className="mt-20 text-center py-10 border-t border-border/50">
           <p className="text-muted-foreground mb-4">Can't find what you're looking for?</p>
