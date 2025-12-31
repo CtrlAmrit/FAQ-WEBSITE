@@ -172,12 +172,16 @@
     @apply bg-card rounded-xl border border-border overflow-hidden transition-all duration-300;
 }
 
-.faq-item:hover {
-    @apply border-primary;
+.faq-item.active {
+    @apply border-primary shadow-sm;
 }
 
 .faq-question {
-    @apply w-full py-6 px-8 flex justify-between items-center bg-transparent border-none cursor-pointer text-left text-lg font-semibold text-foreground outline-none;
+    @apply w-full py-6 px-8 flex justify-between items-center bg-transparent border-none cursor-pointer text-left text-lg font-semibold text-foreground outline-none transition-colors duration-300;
+}
+
+.faq-item.active .faq-question {
+    @apply text-primary;
 }
 
 .faq-question:focus-visible {
@@ -193,15 +197,15 @@
 }
 
 .faq-answer {
-    @apply max-h-0 overflow-hidden transition-all duration-400 ease-in-out;
+    @apply max-h-0 overflow-hidden transition-all duration-500 ease-in-out;
 }
 
 .faq-item.active .faq-answer {
-    @apply max-h-[1000px] pb-6;
+    @apply max-h-[1000px];
 }
 
 .faq-answer-content {
-    @apply px-8 pb-6 text-muted-foreground text-[1.0625rem];
+    @apply px-8 pb-8 text-muted-foreground text-[1.0625rem] leading-relaxed;
 }
 
 /* Hide Next.js error overlay portal */
