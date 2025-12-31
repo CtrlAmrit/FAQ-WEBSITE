@@ -45,7 +45,7 @@ export const faqData = {
             {
                 id: 'g4',
                 question: 'Where can I find your office?',
-                answer: 'We are primarily a remote-first company, but our main headquarters is located in New York City.'
+                answer: 'We are primarily a remote-first company, but our main campus is located at SRM Kattankulathur.'
             },
             {
                 id: 'g5',
