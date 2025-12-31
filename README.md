@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+---
 
-First, run the development server:
+## ▶️ How to Run
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. Download or clone the repository
+2. Open `index.html` in any modern web browser
+3. No server, build tools, or dependencies required
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚫 Constraints Followed
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- No backend or database
+- No frameworks (React, Bootstrap, Tailwind, etc.)
+- No authentication or external libraries
+- JavaScript-only interaction handling
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🎯 Design Philosophy
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The UI is intentionally **light-first** to maximize readability and clarity, following patterns used by real-world help centers.  
+The focus is on **usability, accessibility, and clean interaction logic** rather than unnecessary complexity.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 📌 Possible Enhancements (Future Scope)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Dark mode toggle
+- Additional FAQ categories
+- Backend-powered dynamic content
+- Analytics on most viewed questions
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+*(Not implemented to keep scope aligned with requirements.)*
+
+---
+
+## 👤 Author
+
+Built as part of a front-end JavaScript assignment to demonstrate interactive UI behavior and clean page structure.
+
+---
+
+ for more details.
