@@ -1,27 +1,46 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { faqData, type CategoryId } from '@/lib/data';
 import { useSearchParams } from 'next/navigation';
 
 export function FAQList() {
   const searchParams = useSearchParams();
-  const categoryId = (searchParams.get('category') as CategoryId) || 'general';
+  const categoryParam = searchParams.get('category');
+  const categoryId = categoryParam as CategoryId;
   const [activeId, setActiveId] = useState<string | null>(null);
 
   const category = faqData.categories.find(c => c.id === categoryId);
-  const questions = faqData.questions[categoryId] || [];
+  const questions = categoryId ? (faqData.questions[categoryId] || []) : [];
+
+  useEffect(() => {
+    if (category) {
+      document.title = `${category.title} FAQ | Help Center`;
+    } else {
+      document.title = 'FAQ | Help Center';
+    }
+  }, [category]);
 
   const toggleAccordion = (id: string) => {
     setActiveId(activeId === id ? null : id);
   };
 
-  if (!category) {
+  if (!categoryParam || !category) {
     return (
-      <div className="text-center py-20">
-        <h2 className="text-2xl font-bold mb-4">Category not found</h2>
-        <Link href="/" className="text-primary hover:underline">Return to categories</Link>
+      <div className="container mx-auto px-4 py-20 text-center max-w-2xl">
+        <div className="bg-muted/30 rounded-2xl p-8 border border-dashed">
+          <h2 className="text-3xl font-bold mb-4">Oops! Category Not Found</h2>
+          <p className="text-xl text-muted-foreground mb-8">
+            The FAQ category you're looking for doesn't exist or may have been moved.
+          </p>
+          <Link 
+            href="/" 
+            className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-primary text-primary-foreground font-medium hover:opacity-90 transition-opacity"
+          >
+            Browse All Categories
+          </Link>
+        </div>
       </div>
     );
   }
