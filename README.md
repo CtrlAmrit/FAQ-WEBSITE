@@ -1,45 +1,55 @@
+# Help & FAQs – Interactive FAQ Website
+
+A modern, interactive **FAQ / Help Center website** built with **HTML, CSS, JavaScript**, and structured using **Next.js** as a front-end scaffold.
+
+The project focuses on **JavaScript-driven UI behavior, clean layout, accessibility, and user experience**, following the assignment requirements.
 
 ---
 
-## ▶️ How to Run
+## ✨ Features
 
-1. Download or clone the repository
-2. Open `index.html` in any modern web browser
-3. No server, build tools, or dependencies required
+### 🔹 FAQ Categories Page
+- Displays FAQ categories as **card-based navigation**
+- Entire card is clickable for better usability
+- Remembers the **last visited category**
+- “Continue where you left off” indicator for better UX
+- Clean, balanced grid layout with subtle hover feedback
 
----
+### 🔹 FAQ Questions Page
+- Dynamically loads questions based on selected category
+- Accordion-style interaction (only one answer open at a time)
+- Answers hidden by default and revealed using JavaScript
+- Real-time search to filter questions
+- Progress indicator showing visible questions
+- “Back to Categories” navigation
 
-## 🚫 Constraints Followed
+### 🔹 UI / UX Design
+- Light, professional help-center style UI
+- Slightly tinted background to reduce excessive whiteness
+- Clear typography hierarchy and spacing
+- Subtle shadows and borders for visual depth
+- Micro-interactions without heavy animations
 
-- No backend or database
-- No frameworks (React, Bootstrap, Tailwind, etc.)
-- No authentication or external libraries
-- JavaScript-only interaction handling
-
----
-
-## 🎯 Design Philosophy
-
-The UI is intentionally **light-first** to maximize readability and clarity, following patterns used by real-world help centers.  
-The focus is on **usability, accessibility, and clean interaction logic** rather than unnecessary complexity.
-
----
-
-## 📌 Possible Enhancements (Future Scope)
-
-- Dark mode toggle
-- Additional FAQ categories
-- Backend-powered dynamic content
-- Analytics on most viewed questions
-
-*(Not implemented to keep scope aligned with requirements.)*
+### 🔹 Accessibility
+- Keyboard-accessible FAQ items (Enter key support)
+- Clear focus states
+- ARIA attributes for better screen reader support
 
 ---
 
-## 👤 Author
+## 🧠 Concepts Demonstrated
 
-Built as part of a front-end JavaScript assignment to demonstrate interactive UI behavior and clean page structure.
+- DOM manipulation
+- JavaScript event handling
+- Accordion UI logic
+- Dynamic content rendering
+- URL-based navigation
+- Local storage for state persistence
+- Responsive layout
+- Accessibility best practices
 
 ---
 
- for more details.
+## 🗂️ Project Structure
+
+
