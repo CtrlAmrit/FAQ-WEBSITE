@@ -8,25 +8,25 @@ const faqData = {
         {
             id: 'general',
             title: 'General',
-            description: 'Common questions about our services and policies.',
+            description: 'Common questions about our services and general information.',
             icon: '🔍'
         },
         {
-            id: 'account',
-            title: 'Account',
-            description: 'Manage your profile, password, and security settings.',
-            icon: '👤'
+            id: 'events',
+            title: 'Events',
+            description: 'Information about upcoming events, registrations, and schedules.',
+            icon: '📅'
         },
         {
-            id: 'billing',
-            title: 'Billing',
-            description: 'Questions about payments, invoices, and subscriptions.',
-            icon: '💳'
+            id: 'membership',
+            title: 'Membership',
+            description: 'Everything you need to know about joining and benefits.',
+            icon: '💎'
         },
         {
             id: 'technical',
-            title: 'Technical Support',
-            description: 'Troubleshooting and technical assistance.',
+            title: 'Technical',
+            description: 'Troubleshooting, platform usage, and technical support.',
             icon: '🛠️'
         }
     ],
@@ -43,28 +43,28 @@ const faqData = {
                 answer: 'Simply browse the categories on the home page and click on any topic to see the related questions.'
             }
         ],
-        account: [
+        events: [
             {
-                id: 'a1',
-                question: 'How do I change my password?',
-                answer: 'You can change your password in the settings section of your profile page after logging in.'
+                id: 'e1',
+                question: 'How do I register for an event?',
+                answer: 'You can register through the events page by selecting the specific event and filling out the registration form.'
             },
             {
-                id: 'a2',
-                question: 'Can I delete my account?',
-                answer: 'Yes, you can request account deletion from the security tab in your account settings.'
+                id: 'e2',
+                question: 'Are events recorded?',
+                answer: 'Most of our virtual events are recorded and made available to members within 48 hours.'
             }
         ],
-        billing: [
+        membership: [
             {
-                id: 'b1',
-                question: 'What payment methods do you accept?',
-                answer: 'We accept all major credit cards, PayPal, and bank transfers.'
+                id: 'm1',
+                question: 'What are the membership tiers?',
+                answer: 'We offer Basic, Pro, and Enterprise tiers to suit different needs and scales.'
             },
             {
-                id: 'b2',
-                question: 'How can I download my invoices?',
-                answer: 'Invoices are available for download in the billing history section of your dashboard.'
+                id: 'm2',
+                question: 'How can I cancel my membership?',
+                answer: 'You can cancel your membership at any time through your account settings.'
             }
         ],
         technical: [
