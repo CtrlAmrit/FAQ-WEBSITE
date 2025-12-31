@@ -9,7 +9,7 @@ The project focuses on **JavaScript-driven UI behavior, clean layout, accessibil
 ## ✨ Features
 
 ### 🔹 FAQ Categories Page
-- Displays FAQ categories as **card-based navigation**
+- Displays FAQ categories as card-based navigation
 - Entire card is clickable for better usability
 - Remembers the **last visited category**
 - “Continue where you left off” indicator for better UX
