@@ -1,7 +1,18 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { faqData } from '@/lib/data';
 
 export default function HomePage() {
+  const [lastCategory, setLastCategory] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setLastCategory(localStorage.getItem('last_category'));
+    }
+  }, []);
+
   return (
     <div className="min-h-screen py-12 px-4 md:py-20">
       <div className="max-w-5xl mx-auto bg-white rounded-3xl shadow-sm border border-border p-6 md:p-12">
@@ -13,6 +24,20 @@ export default function HomePage() {
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Search our knowledge base or browse by category to find answers to common questions.
           </p>
+          {lastCategory && (
+            <div className="mt-8 animate-in fade-in slide-in-from-top-4 duration-700">
+              <Link 
+                href={`/faq?category=${lastCategory}`}
+                className="inline-flex items-center gap-2 text-sm font-medium text-primary bg-primary/5 px-4 py-2 rounded-full border border-primary/10 hover:bg-primary/10 transition-colors"
+              >
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                </span>
+                Continue where you left off: <span className="font-bold">{faqData.categories.find(c => c.id === lastCategory)?.title}</span> →
+              </Link>
+            </div>
+          )}
         </header>
 
         <main className="categories-grid">
@@ -20,15 +45,20 @@ export default function HomePage() {
             <Link 
               key={category.id} 
               href={`/faq?category=${category.id}`}
-              className="category-card group"
+              className={`category-card group ${lastCategory === category.id ? 'ring-2 ring-primary ring-offset-4 ring-offset-white' : ''}`}
               aria-label={`Browse questions about ${category.title}`}
             >
               <div className="category-icon">
                 {category.icon}
               </div>
               <div className="category-content">
-                <h3>{category.title}</h3>
-                <p>{category.description}</p>
+                <div className="flex items-center gap-2 mb-1">
+                  <h3 className="text-lg font-bold text-foreground tracking-tight">{category.title}</h3>
+                  {lastCategory === category.id && (
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-primary bg-primary/10 px-1.5 py-0.5 rounded">Last Visited</span>
+                  )}
+                </div>
+                <p className="text-sm text-muted-foreground mb-4 leading-relaxed">{category.description}</p>
               </div>
               <div className="category-arrow">
                 Explore Questions

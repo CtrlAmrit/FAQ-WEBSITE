@@ -151,7 +151,7 @@
 }
 
 .faq-question:focus-visible {
-    @apply bg-primary/[0.02];
+    @apply ring-2 ring-primary ring-inset bg-primary/[0.02] z-10;
 }
 
 .icon-wrapper {

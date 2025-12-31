@@ -11,6 +11,8 @@ export function FAQList() {
   const categoryId = categoryParam as CategoryId;
   const [activeId, setActiveId] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [viewedIds, setViewedIds] = useState<string[]>([]);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
 
   const category = faqData.categories.find(c => c.id === categoryId);
   const questions = categoryId ? (faqData.questions[categoryId] || []) : [];
@@ -25,6 +27,36 @@ export function FAQList() {
     );
   }, [questions, searchQuery]);
 
+  // Load state from localStorage on mount and when category changes
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedActiveId = localStorage.getItem(`active_question_${categoryId}`);
+      const savedViewedIds = localStorage.getItem('viewed_questions');
+
+      if (savedViewedIds) {
+        setViewedIds(JSON.parse(savedViewedIds));
+      }
+
+      if (savedActiveId) {
+        setActiveId(savedActiveId);
+      } else if (questions.length > 0) {
+        setActiveId(questions[0].id);
+      }
+      
+      if (categoryId) {
+        localStorage.setItem('last_category', categoryId);
+      }
+      setIsInitialLoad(false);
+    }
+  }, [categoryId]);
+
+  // Handle search expansion - only if user is actively searching
+  useEffect(() => {
+    if (!isInitialLoad && searchQuery && filteredQuestions.length > 0) {
+      setActiveId(filteredQuestions[0].id);
+    }
+  }, [searchQuery, filteredQuestions, isInitialLoad]);
+
   useEffect(() => {
     if (category) {
       document.title = `${category.title} FAQ | Help Center`;
@@ -34,7 +66,19 @@ export function FAQList() {
   }, [category]);
 
   const toggleAccordion = (id: string) => {
-    setActiveId(activeId === id ? null : id);
+    const newActiveId = activeId === id ? null : id;
+    setActiveId(newActiveId);
+    
+    if (newActiveId) {
+      localStorage.setItem(`active_question_${categoryId}`, newActiveId);
+      if (!viewedIds.includes(newActiveId)) {
+        const nextViewed = [...viewedIds, newActiveId];
+        setViewedIds(nextViewed);
+        localStorage.setItem('viewed_questions', JSON.stringify(nextViewed));
+      }
+    } else {
+      localStorage.removeItem(`active_question_${categoryId}`);
+    }
   };
 
   if (!categoryParam || !category) {
@@ -69,24 +113,29 @@ export function FAQList() {
           Back to Categories
         </Link>
 
-        <header className="mb-12">
-          <h1 className="text-4xl font-bold mb-3 tracking-tight text-foreground">{category.title} FAQ</h1>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            {category.description} Find everything you need to know about {category.title.toLowerCase()}.
+        <header className="mb-10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-3">
+            <h1 className="text-5xl font-extrabold tracking-tight text-foreground">{category.title}</h1>
+            <div className="text-sm font-medium text-muted-foreground bg-muted/50 px-3 py-1 rounded-full border border-border/50">
+              Showing {filteredQuestions.length} of {questions.length} questions
+            </div>
+          </div>
+          <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
+            {category.description} Find everything you need to know about {category.title.toLowerCase()} in our knowledge base.
           </p>
         </header>
 
         {/* Search Input */}
-        <div className="relative mb-10">
+        <div className="relative mb-12">
           <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-            <svg className="h-5 w-5 text-muted-foreground/70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="h-5 w-5 text-muted-foreground/50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </div>
           <input
             type="text"
             placeholder={`Search ${category.title} questions...`}
-            className="w-full pl-11 pr-4 py-4 bg-white border border-border rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-sm text-base"
+            className="w-full pl-11 pr-4 py-4 bg-muted/20 border border-border/60 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/40 transition-all text-base placeholder:text-muted-foreground/40"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -107,17 +156,26 @@ export function FAQList() {
             filteredQuestions.map((q) => (
               <div 
                 key={q.id} 
-                className={`faq-item ${activeId === q.id ? 'active' : ''}`}
+                className={`faq-item group/item ${activeId === q.id ? 'active' : ''} ${viewedIds.includes(q.id) && activeId !== q.id ? 'opacity-80' : ''}`}
               >
                 <button 
-                  className="faq-question group"
+                  className="faq-question"
                   onClick={() => toggleAccordion(q.id)}
                   aria-expanded={activeId === q.id}
                   aria-controls={`answer-${q.id}`}
                   id={`question-${q.id}`}
                 >
-                  <span className="flex-1 pr-4">{q.question}</span>
-                  <div className="icon-wrapper w-8 h-8 rounded-full bg-muted/50 flex items-center justify-center transition-colors group-hover:bg-primary/10">
+                  <span className="flex items-center gap-3 flex-1 pr-4">
+                    {viewedIds.includes(q.id) && (
+                      <span className="text-primary/60 text-xs shrink-0" title="Recently viewed">
+                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </span>
+                    )}
+                    <span className="line-clamp-2">{q.question}</span>
+                  </span>
+                  <div className="icon-wrapper w-8 h-8 rounded-full bg-muted/50 flex items-center justify-center transition-all group-hover/item:bg-primary/10 group-hover/item:text-primary">
                     <svg 
                       className="icon w-4 h-4" 
                       fill="none" 
@@ -140,7 +198,7 @@ export function FAQList() {
                   aria-labelledby={`question-${q.id}`}
                 >
                   <div className="faq-answer-inner">
-                    <div className="faq-answer-content">
+                    <div className="faq-answer-content pl-11 pr-6 pb-6 text-muted-foreground/80 font-normal border-l-2 border-primary/5 ml-5 md:ml-6">
                       {q.answer}
                     </div>
                   </div>
