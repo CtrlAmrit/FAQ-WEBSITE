@@ -44,25 +44,25 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --radius: 0.75rem;
+  --background: #f7f8fa;
+  --foreground: #1a1a1a;
+  --card: #ffffff;
+  --card-foreground: #1a1a1a;
+  --popover: #ffffff;
+  --popover-foreground: #1a1a1a;
+  --primary: #2563eb;
+  --primary-foreground: #ffffff;
+  --secondary: #f1f5f9;
+  --secondary-foreground: #1e293b;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --accent: #f8fafc;
+  --accent-foreground: #2563eb;
+  --destructive: #ef4444;
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #2563eb;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -78,138 +78,92 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
-}
-
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground min-h-screen;
   }
 }
 
 /* FAQ Specific Styles */
 .categories-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.5rem;
 }
 
 .category-card {
-    @apply bg-card p-8 rounded-2xl shadow-sm decoration-0 text-current transition-all duration-300 border border-border flex flex-col relative outline-none ring-offset-background;
+    @apply bg-card p-6 rounded-xl shadow-sm decoration-0 text-current transition-all duration-300 border border-border flex flex-col relative outline-none;
 }
 
 .category-card:hover {
-    @apply -translate-y-1 border-primary/50 shadow-md bg-accent/5;
+    @apply -translate-y-1 shadow-md border-border/50;
 }
 
 .category-card:focus-visible {
-    @apply outline-none ring-2 ring-primary ring-offset-2;
+    @apply ring-2 ring-primary ring-offset-2;
 }
 
 .category-icon {
-    @apply text-4xl mb-6 bg-primary/5 w-14 h-14 flex items-center justify-center rounded-2xl transition-colors duration-300;
+    @apply text-3xl mb-4 bg-primary/[0.03] w-12 h-12 flex items-center justify-center rounded-lg text-primary transition-colors duration-300;
 }
 
 .category-card:hover .category-icon {
-    @apply bg-primary/10;
+    @apply bg-primary/[0.06];
 }
 
 .category-content h3 {
-    @apply text-xl font-bold mb-2 text-foreground tracking-tight;
+    @apply text-lg font-bold mb-1 text-foreground tracking-tight;
 }
 
 .category-content p {
-    @apply text-sm text-muted-foreground mb-6 leading-relaxed;
+    @apply text-sm text-muted-foreground mb-4 leading-relaxed;
 }
 
 .category-arrow {
-    @apply mt-auto text-primary flex items-center font-semibold text-sm transition-all duration-300;
-}
-
-.category-card:hover .category-arrow {
-    @apply translate-x-1 opacity-80;
+    @apply mt-auto text-primary flex items-center font-semibold text-xs uppercase tracking-wider transition-all duration-300;
 }
 
 .back-link {
-    @apply inline-flex items-center text-muted-foreground hover:text-primary decoration-0 mb-8 font-medium gap-2 transition-all duration-300 text-sm;
-}
-
-.back-link:hover {
-    @apply -translate-x-1;
+    @apply inline-flex items-center text-muted-foreground hover:text-primary decoration-0 mb-6 font-medium gap-2 transition-all duration-300 text-sm;
 }
 
 .faq-list {
-    @apply flex flex-col gap-4;
+    @apply flex flex-col gap-3;
 }
 
 .faq-item {
-    @apply bg-card rounded-2xl border border-border overflow-hidden transition-all duration-300;
-}
-
-.faq-item:hover:not(.active) {
-    @apply border-primary/30 bg-accent/5;
+    @apply bg-card rounded-xl border border-border overflow-hidden transition-all duration-300;
 }
 
 .faq-item.active {
-    @apply border-primary/50 shadow-sm ring-1 ring-primary/20;
+    @apply border-l-4 border-l-primary bg-primary/[0.01] border-y-border border-r-border shadow-sm;
 }
 
 .faq-question {
-    @apply w-full py-5 px-6 flex justify-between items-center bg-transparent border-none cursor-pointer text-left text-[1.0625rem] font-semibold text-foreground outline-none transition-all duration-300 gap-4;
+    @apply w-full py-4 px-5 flex justify-between items-center bg-transparent border-none cursor-pointer text-left text-base font-medium text-foreground outline-none transition-all duration-200 gap-4;
 }
 
 .faq-item.active .faq-question {
-    @apply text-primary pb-3;
+    @apply text-primary font-semibold;
 }
 
 .faq-question:focus-visible {
-    @apply bg-primary/5;
+    @apply bg-primary/[0.02];
 }
 
-.faq-question .icon {
-    @apply transition-transform duration-500 text-muted-foreground shrink-0;
+.icon-wrapper {
+    @apply transition-transform duration-300 text-muted-foreground/60 shrink-0;
 }
 
-.faq-item.active .faq-question .icon {
+.faq-item.active .icon-wrapper {
     @apply rotate-180 text-primary;
 }
 
 .faq-answer {
-    @apply grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-in-out;
+    @apply grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out;
 }
 
 .faq-item.active .faq-answer {
@@ -221,7 +175,7 @@
 }
 
 .faq-answer-content {
-    @apply px-6 pb-6 text-muted-foreground text-[0.9375rem] leading-relaxed;
+    @apply px-5 pb-5 text-muted-foreground text-[0.9375rem] leading-relaxed;
 }
 
 /* Hide Next.js error overlay portal */

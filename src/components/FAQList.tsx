@@ -37,9 +37,10 @@ export function FAQList() {
     setActiveId(activeId === id ? null : id);
   };
 
-    if (!categoryParam || !category) {
-      return (
-        <div className="container mx-auto px-4 py-20 text-center max-w-2xl">
+  if (!categoryParam || !category) {
+    return (
+      <div className="min-h-screen py-12 px-4 md:py-20">
+        <div className="max-w-3xl mx-auto bg-white rounded-3xl shadow-sm border border-border p-8 md:p-12 text-center">
           <Link href="/" className="back-link mb-8 inline-flex">
             ← Back to Categories
           </Link>
@@ -56,11 +57,13 @@ export function FAQList() {
             </Link>
           </div>
         </div>
-      );
-    }
-  
-    return (
-      <div className="container mx-auto px-4 py-12 max-w-3xl">
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen py-12 px-4 md:py-20">
+      <div className="max-w-4xl mx-auto bg-white rounded-3xl shadow-sm border border-border p-6 md:p-12">
         <Link href="/" className="back-link group">
           <span className="transition-transform duration-300 group-hover:-translate-x-1">←</span>
           Back to Categories
@@ -83,7 +86,7 @@ export function FAQList() {
           <input
             type="text"
             placeholder={`Search ${category.title} questions...`}
-            className="w-full pl-11 pr-4 py-3.5 bg-card border border-border rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary/50 transition-all shadow-sm"
+            className="w-full pl-11 pr-4 py-4 bg-white border border-border rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-sm text-base"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -106,42 +109,42 @@ export function FAQList() {
                 key={q.id} 
                 className={`faq-item ${activeId === q.id ? 'active' : ''}`}
               >
-                  <button 
-                    className="faq-question group"
-                    onClick={() => toggleAccordion(q.id)}
-                    aria-expanded={activeId === q.id}
-                    aria-controls={`answer-${q.id}`}
-                    id={`question-${q.id}`}
-                  >
-                    <span className="flex-1">{q.question}</span>
-                    <div className="icon-wrapper w-8 h-8 rounded-full bg-muted/50 flex items-center justify-center transition-colors group-hover:bg-primary/10">
-                      <svg 
-                        className="icon w-4 h-4" 
-                        fill="none" 
-                        stroke="currentColor" 
-                        viewBox="0 0 24 24"
-                      >
-                        <path 
-                          strokeLinecap="round" 
-                          strokeLinejoin="round" 
-                          strokeWidth={2.5} 
-                          d="M19 9l-7 7-7-7" 
-                        />
-                      </svg>
-                    </div>
-                  </button>
-                  <div 
-                    className="faq-answer"
-                    id={`answer-${q.id}`}
-                    role="region"
-                    aria-labelledby={`question-${q.id}`}
-                  >
-                    <div className="faq-answer-inner">
-                      <div className="faq-answer-content">
-                        {q.answer}
-                      </div>
+                <button 
+                  className="faq-question group"
+                  onClick={() => toggleAccordion(q.id)}
+                  aria-expanded={activeId === q.id}
+                  aria-controls={`answer-${q.id}`}
+                  id={`question-${q.id}`}
+                >
+                  <span className="flex-1 pr-4">{q.question}</span>
+                  <div className="icon-wrapper w-8 h-8 rounded-full bg-muted/50 flex items-center justify-center transition-colors group-hover:bg-primary/10">
+                    <svg 
+                      className="icon w-4 h-4" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        strokeWidth={2.5} 
+                        d="M19 9l-7 7-7-7" 
+                      />
+                    </svg>
+                  </div>
+                </button>
+                <div 
+                  className="faq-answer"
+                  id={`answer-${q.id}`}
+                  role="region"
+                  aria-labelledby={`question-${q.id}`}
+                >
+                  <div className="faq-answer-inner">
+                    <div className="faq-answer-content">
+                      {q.answer}
                     </div>
                   </div>
+                </div>
               </div>
             ))
           ) : (
@@ -154,7 +157,7 @@ export function FAQList() {
               {searchQuery && (
                 <button 
                   onClick={() => setSearchQuery('')}
-                  className="px-6 py-2.5 bg-primary/10 text-primary font-semibold rounded-full hover:bg-primary/20 transition-colors"
+                  className="px-6 py-2.5 bg-primary text-white font-semibold rounded-full hover:opacity-90 transition-opacity"
                 >
                   Clear search query
                 </button>
@@ -169,5 +172,6 @@ export function FAQList() {
           </p>
         </div>
       </div>
-    );
+    </div>
+  );
 }
