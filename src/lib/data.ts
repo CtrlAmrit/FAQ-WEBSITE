@@ -1,9 +1,4 @@
-/**
- * FAQ Data
- * Central storage for all categories and their questions
- */
-
-const faqData = {
+export const faqData = {
     categories: [
         {
             id: 'general',
@@ -80,9 +75,6 @@ const faqData = {
             }
         ]
     }
-};
+} as const;
 
-// Export data for use in other scripts
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = faqData;
-}
+export type CategoryId = keyof typeof faqData.questions;

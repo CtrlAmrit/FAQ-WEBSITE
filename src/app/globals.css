@@ -121,6 +121,89 @@
   }
 }
 
+/* FAQ Specific Styles */
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.category-card {
+    @apply bg-card p-10 rounded-2xl shadow-sm decoration-0 text-current transition-all duration-300 border border-border flex flex-col relative outline-none;
+}
+
+.category-card:hover, .category-card:focus-visible {
+    @apply -translate-y-2 border-primary shadow-xl;
+}
+
+.category-icon {
+    @apply text-4xl mb-6 bg-muted w-16 h-16 flex items-center justify-center rounded-xl;
+}
+
+.category-content h3 {
+    @apply text-2xl font-semibold mb-3 text-foreground;
+}
+
+.category-content p {
+    @apply text-base text-muted-foreground mb-6;
+}
+
+.category-arrow {
+    @apply mt-auto text-primary flex items-center font-semibold text-sm transition-transform duration-300;
+}
+
+.category-card:hover .category-arrow {
+    @apply translate-x-1;
+}
+
+.back-link {
+    @apply inline-flex items-center text-primary decoration-0 mb-10 font-semibold gap-2 transition-all duration-300;
+}
+
+.back-link:hover {
+    @apply -translate-x-1 opacity-80;
+}
+
+.faq-list {
+    @apply flex flex-col gap-5;
+}
+
+.faq-item {
+    @apply bg-card rounded-xl border border-border overflow-hidden transition-all duration-300;
+}
+
+.faq-item:hover {
+    @apply border-primary;
+}
+
+.faq-question {
+    @apply w-full py-6 px-8 flex justify-between items-center bg-transparent border-none cursor-pointer text-left text-lg font-semibold text-foreground outline-none;
+}
+
+.faq-question:focus-visible {
+    @apply bg-muted;
+}
+
+.faq-question .icon {
+    @apply transition-transform duration-300 text-muted-foreground;
+}
+
+.faq-item.active .faq-question .icon {
+    @apply rotate-180 text-primary;
+}
+
+.faq-answer {
+    @apply max-h-0 overflow-hidden transition-all duration-400 ease-in-out;
+}
+
+.faq-item.active .faq-answer {
+    @apply max-h-[1000px] pb-6;
+}
+
+.faq-answer-content {
+    @apply px-8 pb-6 text-muted-foreground text-[1.0625rem];
+}
+
 /* Hide Next.js error overlay portal */
 nextjs-portal {
   display: none !important;
