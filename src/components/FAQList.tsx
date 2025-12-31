@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import { faqData, type CategoryId } from '@/lib/data';
 import { useSearchParams } from 'next/navigation';
@@ -10,9 +10,20 @@ export function FAQList() {
   const categoryParam = searchParams.get('category');
   const categoryId = categoryParam as CategoryId;
   const [activeId, setActiveId] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const category = faqData.categories.find(c => c.id === categoryId);
   const questions = categoryId ? (faqData.questions[categoryId] || []) : [];
+
+  const filteredQuestions = useMemo(() => {
+    if (!searchQuery.trim()) return questions;
+    const query = searchQuery.toLowerCase();
+    return questions.filter(
+      (q) =>
+        q.question.toLowerCase().includes(query) ||
+        q.answer.toLowerCase().includes(query)
+    );
+  }, [questions, searchQuery]);
 
   useEffect(() => {
     if (category) {
@@ -60,9 +71,25 @@ export function FAQList() {
         <p className="text-xl text-muted-foreground">{category.description}</p>
       </header>
 
+      {/* Search Input */}
+      <div className="relative mb-8">
+        <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+          <svg className="h-5 w-5 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+        <input
+          type="text"
+          placeholder="Search questions..."
+          className="w-full pl-11 pr-4 py-3 bg-card border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      </div>
+
       <div className="faq-list">
-        {questions.length > 0 ? (
-          questions.map((q) => (
+        {filteredQuestions.length > 0 ? (
+          filteredQuestions.map((q) => (
             <div 
               key={q.id} 
               className={`faq-item ${activeId === q.id ? 'active' : ''}`}
@@ -102,7 +129,23 @@ export function FAQList() {
             </div>
           ))
         ) : (
-          <p className="text-center py-10 text-muted-foreground">No questions found for this category.</p>
+          <div className="text-center py-12 bg-muted/10 rounded-2xl border border-dashed border-border">
+            <div className="mb-4 text-4xl">🔍</div>
+            <h3 className="text-xl font-semibold mb-2">No matching questions</h3>
+            <p className="text-muted-foreground">
+              We couldn't find any questions matching "{searchQuery}".
+              <br />
+              Try adjusting your search terms or clearing the filter.
+            </p>
+            {searchQuery && (
+              <button 
+                onClick={() => setSearchQuery('')}
+                className="mt-6 text-primary font-medium hover:underline px-4 py-2 rounded-lg bg-primary/10 transition-colors"
+              >
+                Clear search
+              </button>
+            )}
+          </div>
         )}
       </div>
     </div>
