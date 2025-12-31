@@ -124,72 +124,84 @@
 /* FAQ Specific Styles */
 .categories-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
 }
 
 .category-card {
-    @apply bg-card p-10 rounded-2xl shadow-sm decoration-0 text-current transition-all duration-300 border border-border flex flex-col relative outline-none;
+    @apply bg-card p-8 rounded-2xl shadow-sm decoration-0 text-current transition-all duration-300 border border-border flex flex-col relative outline-none ring-offset-background;
 }
 
-.category-card:hover, .category-card:focus-visible {
-    @apply -translate-y-2 border-primary shadow-xl;
+.category-card:hover {
+    @apply -translate-y-1 border-primary/50 shadow-md bg-accent/5;
+}
+
+.category-card:focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2;
 }
 
 .category-icon {
-    @apply text-4xl mb-6 bg-muted w-16 h-16 flex items-center justify-center rounded-xl;
+    @apply text-4xl mb-6 bg-primary/5 w-14 h-14 flex items-center justify-center rounded-2xl transition-colors duration-300;
+}
+
+.category-card:hover .category-icon {
+    @apply bg-primary/10;
 }
 
 .category-content h3 {
-    @apply text-2xl font-semibold mb-3 text-foreground;
+    @apply text-xl font-bold mb-2 text-foreground tracking-tight;
 }
 
 .category-content p {
-    @apply text-base text-muted-foreground mb-6;
+    @apply text-sm text-muted-foreground mb-6 leading-relaxed;
 }
 
 .category-arrow {
-    @apply mt-auto text-primary flex items-center font-semibold text-sm transition-transform duration-300;
+    @apply mt-auto text-primary flex items-center font-semibold text-sm transition-all duration-300;
 }
 
 .category-card:hover .category-arrow {
-    @apply translate-x-1;
+    @apply translate-x-1 opacity-80;
 }
 
 .back-link {
-    @apply inline-flex items-center text-primary decoration-0 mb-10 font-semibold gap-2 transition-all duration-300;
+    @apply inline-flex items-center text-muted-foreground hover:text-primary decoration-0 mb-8 font-medium gap-2 transition-all duration-300 text-sm;
 }
 
 .back-link:hover {
-    @apply -translate-x-1 opacity-80;
+    @apply -translate-x-1;
 }
 
 .faq-list {
-    @apply flex flex-col gap-5;
+    @apply flex flex-col gap-4;
 }
 
 .faq-item {
-    @apply bg-card rounded-xl border border-border overflow-hidden transition-all duration-300;
+    @apply bg-card rounded-2xl border border-border overflow-hidden transition-all duration-300;
+}
+
+.faq-item:hover:not(.active) {
+    @apply border-primary/30 bg-accent/5;
 }
 
 .faq-item.active {
-    @apply border-primary shadow-sm;
+    @apply border-primary/50 shadow-sm ring-1 ring-primary/20;
 }
 
 .faq-question {
-    @apply w-full py-6 px-8 flex justify-between items-center bg-transparent border-none cursor-pointer text-left text-lg font-semibold text-foreground outline-none transition-colors duration-300;
+    @apply w-full py-5 px-6 flex justify-between items-center bg-transparent border-none cursor-pointer text-left text-[1.0625rem] font-semibold text-foreground outline-none transition-all duration-300 gap-4;
 }
 
 .faq-item.active .faq-question {
-    @apply text-primary;
+    @apply text-primary pb-3;
 }
 
 .faq-question:focus-visible {
-    @apply bg-muted;
+    @apply bg-primary/5;
 }
 
 .faq-question .icon {
-    @apply transition-transform duration-300 text-muted-foreground;
+    @apply transition-transform duration-500 text-muted-foreground shrink-0;
 }
 
 .faq-item.active .faq-question .icon {
@@ -197,15 +209,19 @@
 }
 
 .faq-answer {
-    @apply max-h-0 overflow-hidden transition-all duration-500 ease-in-out;
+    @apply grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-in-out;
 }
 
 .faq-item.active .faq-answer {
-    @apply max-h-[1000px];
+    @apply grid-rows-[1fr];
+}
+
+.faq-answer-inner {
+    @apply overflow-hidden;
 }
 
 .faq-answer-content {
-    @apply px-8 pb-8 text-muted-foreground text-[1.0625rem] leading-relaxed;
+    @apply px-6 pb-6 text-muted-foreground text-[0.9375rem] leading-relaxed;
 }
 
 /* Hide Next.js error overlay portal */
